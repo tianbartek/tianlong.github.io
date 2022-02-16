@@ -114,15 +114,20 @@
 
 <body>
 	<div class="center-justified" style="width:1000px;"> 
-		<h1>Adaptive Trees of Stable Tracked Words for Handheld Cross-Camera Place Recognition</h1>
-		<h3>Alessio Xompero, Oswald Lanz, Andrea Cavallaro</h3>
-		<!-- <h3>Queen Mary University of London - Centre for Intelligent Sensing</h3> -->
-		<!-- <h3>Fondazione Bruno Kessler - Technologies of Vision</h3> -->
+		<h1>cluster-based unsupervised 3D keypoints prediction for category-agnostic 6D object pose tracking</h1>
+		<h3></h3>
 	</div>
 	<div class="center-justified">
 		<p>
-			The online recognition of a place observed by independently moving, hand-held cameras is challenging when a reference 3D map is unavailable. To address this problem, we propose a novel method that identifies and organises compact spatio-temporal scene descriptors in a tree, locally for each camera. These descriptors encode the most persistent values of tracked binary features. We update the descriptor of currently tracked features and adapt the tree with the insertion of new descriptors, the removal of short descriptors, and the re-assignment of the updated descriptors, at automatically selected frames. To enable cross-camera place recognition, each camera shares over time and independently a subset of recent descriptors that are selected within the tree and associated to a frame with the highest number of corresponding binary features. The received descriptors are compared with those in the local tree and matched features are verified through the epipolar geometry to validate the candidate visual place. The proposed approach avoids matching features that are observed only in a single frame and is faster than a baseline that uses an incremental list of spatio-temporal descriptors. 
-		</p>
+            We present a novel deep learning approach for category-agnostic 6D object pose tracking. Unlike category-specific 
+            approaches, our method requires no CAD models or annotated keypoints of the objects to track their pose. 
+            We tackle 6D object pose tracking as an unsupervised 3D keypoint prediction and matching. We represent a 
+            target object using 3D point clouds and separate these 3D points into clusters to estimate the 3D keypoint 
+            from each clusterwhich improves the efficiency of keypoints prediction. The inter-frame change of 6D pose 
+            can be obtained by matching keypoints between the previous and current frame, which enables 6D pose tracking. 
+            Our cluster-based keypoint prediction dose not require prior knowledge of categories, allows category-agnostic 
+            6D pose tracking. We evaluate our method on the NOCS dataset by comparing ours with state-of-the-art methods.
+        </p>
 
 
 	<div style="text-align: center;">
