@@ -119,14 +119,15 @@
 	</div>
 	<div class="center-justified">
 		<p>
-            We present a novel deep learning approach for category-agnostic 6D object pose tracking. Unlike category-specific 
-            approaches, our method requires no CAD models or annotated keypoints of the objects to track their pose. 
-            We tackle 6D object pose tracking as an unsupervised 3D keypoint prediction and matching. We represent a 
-            target object using 3D point clouds and separate these 3D points into clusters to estimate the 3D keypoint 
-            from each clusterwhich improves the efficiency of keypoints prediction. The inter-frame change of 6D pose 
-            can be obtained by matching keypoints between the previous and current frame, which enables 6D pose tracking. 
-            Our cluster-based keypoint prediction dose not require prior knowledge of categories, allows category-agnostic 
-            6D pose tracking. We evaluate our method on the NOCS dataset by comparing ours with state-of-the-art methods.
+				We present a novel deep learning approach for category-agnostic 6D object pose tracking. Unlike
+				category-specific approaches, our method requires no CAD models or annotated keypoints of the
+				objects to track their pose. We tackle 6D object pose tracking as an unsupervised 3D keypoint
+				prediction and matching. The target object is represented in 3D point clouds and we separate
+				these 3D points in clusters to estimate the 3D keypoint from each cluster, which improves the
+				efficiency of keypoint prediction. The inter-frame change of 6D pose can be obtained by matching
+				keypoints between the previous and current frame, which enables 6D pose tracking. Our cluster-based
+				keypoint prediction does not require prior knowledge of categories, allows category-agnostic 6D pose tracking.
+				We evaluate our method on the NOCS dataset by comparing ours with state-of-the-art methods.
         </p>
 
 
@@ -136,38 +137,38 @@
 
 		<br>
 		<br>
-	<h2 class="dataset" style="text-align: left;">Dataset</h2>
+	<h2 class="Tracking results" style="text-align: left;">Results</h2>
 		<table align="center" style="border:0px;padding-left:0px">
 			<tr>
-				<td width="10%" style="border:0px;padding:0px" align="center">Scenario</td>
-				<td width="18%" style="border:0px;padding:0px" align="center">Camera 1</td>
-				<td width="18%" style="border:0px;padding:0px" align="center">Camera 2</td>
-				<td width="18%" style="border:0px;padding:0px" align="center">Camera 3</td>
-				<td width="18%" style="border:0px;padding:0px" align="center">Camera 4</td>
+				<td width="10%" style="border:0px;padding:0px" align="center">Categories</td>
+				<td width="18%" style="border:0px;padding:0px" align="center">tracking results</td>
+				<td width="18%" style="border:0px;padding:0px" align="center">clusters results</td>
+				<td width="18%" style="border:0px;padding:0px" align="center">tracking results</td>
+				<td width="18%" style="border:0px;padding:0px" align="center">clusters results</td>
 			</tr>
 			<tr>
-				<td style="border:0px;padding:0px;vertical-align: middle;"><i>gate</i></td>
+				<td style="border:0px;padding:0px;vertical-align: middle;" align="center"><i>bottle</i></td>
 				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
-					<video width="200" controls autoplay loop style="vertical-align: middle;"><source src="gifs/gate_seq1.mp4" type="video/mp4" >Your browser does not support the video tag.
+					<video width="200" controls autoplay loop style="vertical-align: middle;"><source src="videos/bottle/red_stanford_scene_4.mp4" type="video/mp4" >Your browser does not support the video tag.
 					</video>
 				</td>
 				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
-					<video width="200" controls autoplay loop style="vertical-align: middle;"><source src="gifs/gate_seq2.mp4" type="video/mp4" >Your browser does not support the video tag.
+					<video width="200" controls autoplay loop style="vertical-align: middle;"><source src="videos/bottle/bottle_red_stanford_scene_4_cluster.mp4" type="video/mp4" >Your browser does not support the video tag.
 					</video>
 				</td>
 				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
-					<video width="200" controls autoplay loop style="vertical-align: middle;"><source src="gifs/gate_seq3.mp4" type="video/mp4" >Your browser does not support the video tag.
+					<video width="200" controls autoplay loop style="vertical-align: middle;"><source src="videos/bottle/bottle_shampoo_scene_5.mp4" type="video/mp4" >Your browser does not support the video tag.
 					</video>
 				</td>
 				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
-					<video width="200" controls autoplay loop style="vertical-align: middle;"><source src="https://youtu.be/J1j0ApREFn8" type="video/mp4" >Your browser does not support the video tag.
+					<video width="200" controls autoplay loop style="vertical-align: middle;"><source src="videos/bottle/bottle_shampoo_scene_5_cluster.mp4" type="video/mp4" >Your browser does not support the video tag.
 					</video>
 				</td>
 			</tr>
 		</table>
 		<br>
 		<br>
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/J1j0ApREFn8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!--		<iframe width="560" height="315" src="https://www.youtube.com/embed/J1j0ApREFn8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
 
 		
 
