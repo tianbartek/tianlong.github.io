@@ -3,7 +3,7 @@
 <head>
 
 	<meta charset="UTF-8">
-	<title>cluster-based unsupervised 3D keypoints prediction for category-agnostic 6D object pose tracking</title> 
+	<title>UNSUPERVISED CLUSTER-BASED 3D KEYPOINTS PREDICTION FOR CATEGORY-AGNOSTIC 6D OBJECT POSE TRACKING</title>
 
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -114,21 +114,22 @@
 
 <body>
 	<div class="center-justified" style="width:1000px;"> 
-		<h1>Cluster-based Unsupervised 3D Keypoints Prediction for Category-agnostic 6D Object Pose Tracking</h1>
+		<h1>UNSUPERVISED CLUSTER-BASED 3D KEYPOINTS PREDICTION FOR CATEGORY-AGNOSTIC 6D OBJECT POSE TRACKING</h1>
 		<h2>Long Tian, Andrea Cavallaro, Changjae Oh</h2>
 		<h3> Centre for Intelligent Sensing, Queen Mary University of London, United Kingdom </h3>
 	</div>
 	<div class="center-justified">
 		<p>
-				<b>ABSTRACT:</b> We present a novel approach for category-agnostic 6D object pose tracking. Unlike category-level
-				6D pose tracking that requires one trained model for each category, we train a single deep neural network that can
-				track the 6D pose of the objects from different categories. We tackle 6D object pose tracking as an unsupervised
-				3D keypoint prediction and matching. We present the target object as 3D point clouds and separate these points into
-				clusters to estimate the 3D keypoint from each cluster, which improves the efficiency of keypoint prediction.
-				The change of 6D pose between two frames can then be estimated by matching the keypoints detected from each frame,
-				which enable 6D pose tracking. Our cluster-based keypoint prediction does not require prior knowledge of the object categories,
-				which enables category-agnostic 6D pose tracking. Experiments on the NOCS-REAL275 dataset show that the proposed method
-				is competitive to the existing category-specific methods.
+				<b>ABSTRACT:</b> We present a novel approach for category-agnostic 6D object pose tracking, that is,
+				training a single deep neural network that can track the pose of objects from different categories.
+				The proposed method tackles object pose tracking as an unsupervised 3D keypoint prediction and matching problem.
+				The inputs are RGB,  segmentation mask and depth image. The object, represented as a point cloud, is spatially
+				segmented into clusters regardless of the object categories. Each cluster can be seen as one part of the object,
+				each cluster feature map contains the appearance and geometric information, which is used to predict a keypoint.
+				We can obtain a keypoint set from clusters. With the predicted keypoint sets from two frames, the inter-frame pose change is
+				then estimated by matching keypoints 3D locations, based on least-squares optimization. The loss functions are built to ensure the
+				predicted keypoints are consistent in two frames and suitable for pose estimation.
+				Experiments on the NOCS-REAL275 dataset show that the proposed method is competitive to the existing category-specific methods.
         </p>
 
 		<br>
@@ -141,10 +142,11 @@
 		<p>
 				The overall pipeline of 3D keypoint prediction. The proposed keypoint prediction includes three modules: a feature estimation module,
 				a split module, and a 3D keypoint detection module. The inputs are RGB, depth images, and target object segmentation mask information
-				which is provided by NOCS, while the output is a 3D keypoints set. The feature estimation module uses ResNet and PointNet to extract
-				appearance and geometry features, respectively, which are then fused by using DenseFusion that generates
-				the features encoding XYZ coordinate and fused feature for each 3D point. According to XYZ coordinates, the split model first samples initial points,
-				and then groups a cluster for each initial point. Thus, the target object is separated into different parts. Finally, the 3D keypoint detection module predicts a keypoint from each cluster.
+				which is provided by NOCS, while the output is a 3D keypoint set. The feature estimation module uses ResNet and PointNet to extract
+				appearance and geometry features, respectively, which are then fused by using DenseFusion that generates the features encoding XYZ
+				coordinate and fused feature for each 3D point. According to points XYZ coordinates, the split model first uses FPS algorithm to samples
+				initial points, then finds <i>n</i> nearest points for each initial point in 3D space, and groups its neighbours into a cluster.
+				Thus, the target object is separated into <i>M</i> clusters in total. Finally, the 3D keypoint detection module predicts a keypoint from each cluster.
 		</p>
 
 
