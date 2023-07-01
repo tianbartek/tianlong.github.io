@@ -1,0 +1,351 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<title>Test-time Adaptation 6D Pose Tracking for Unseen Objects</title>
+
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="layout.css">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+
+		h1 {
+			font-size: 200%;
+			text-align: center;
+		}
+
+		h2 {
+			font-size: 150%;
+			text-align: center;
+		}
+
+		h3 {
+			font-size: 100%;
+			text-align: center;
+		}
+
+		.center-justified {
+			text-align: justify;
+			margin: 0 auto;
+			width: 1000px;
+		}
+
+		.center {
+			text-align: center;
+		}
+
+	/* NAVIGATION */
+	nav {0
+		width: 100%;
+		margin: 0 auto;
+		background: #fff;
+	}
+
+	/* By Dominik Biedebach @domobch */
+	nav ul {
+		list-style: none;
+		text-align: center;
+	}
+	nav ul li {
+		display: inline-block;
+	}
+	nav ul li a {
+		display: block;
+		padding: 0px;
+		text-decoration: none;
+		color: #aaa;
+		font-weight: 800;
+		margin: 0 10px;
+	}
+	nav ul li a,
+	nav ul li a:after,
+	nav ul li a:before {
+		transition: all .5s;
+	}
+	nav ul li a:hover {
+		color: #555;
+	}
+
+	/* stroke */
+	nav.stroke ul li a,
+	nav.fill ul li a {
+		position: relative;
+	}
+	nav.stroke ul li a:after,
+	nav.fill ul li a:after {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 0%;
+		content: '.';
+		color: transparent;
+		background: #333;
+		height: 1px;
+	}
+	nav.stroke ul li a:hover:after {
+		width: 100%;
+	}
+
+    .data-table {
+        border-collapse: collapse;
+    }
+    .border-top {
+        border-top: 1px solid #000;
+    }
+    .border-bottom {
+        border-bottom: 1px solid #000;
+    }
+    .border-left {
+        border-left: 1px solid #000;
+    }
+    .border-right {
+        border-right: 1px solid #000;
+    }
+</style>
+
+<script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
+
+<body>
+	<div class="center-justified" style="width:1000px;"> 
+		<h1>Test-time Adaptation 6D Pose Tracking for Unseen Objects</h1>
+		<h2>Long Tian, Andrea Cavallaro, Changjae Oh</h2>
+		<h3> Centre for Intelligent Sensing, Queen Mary University of London, United Kingdom </h3>
+	</div>
+	<div class="center-justified">
+		<p>
+				<b>ABSTRACT:</b> We present a test-time adaptation strategy that effectively transfers knowledge from known
+			       objects to unseen objects in the domain of 6D pose tracking. Our approach addresses object pose tracking
+			       as a 3D keypoint detection and matching task. By leveraging RGB-D data and the target object mask as inputs,
+			       we extract point-wise features that encode both appearance and geometric information. To enhance feature discrimination,
+			       we employ self-attention, enabling points to communicate within frames, and cross-attention, facilitating interaction between
+			       points across frames. Keypoints are then detected from the enhanced features. Pose changes are subsequently recovered through
+			       a least-squares optimisation using keypoint sets from two time instants. Initially, our proposed network is trained in a supervised
+			       manner on a source domain, acquiring prior knowledge of 6D pose tracking at a category-level. Subsequently, the trained model parameters
+			       are updated to adapt to unseen objects. To avoid reliance on ground truth pose changes, we introduce two self-supervised losses
+			       based on photometric and geometric consistency. Extensive experiments are conducted on the NOCS-REAL275 dataset and our collected dataset.
+        </p>
+
+		<br>
+		<br>
+
+
+	<div style="text-align: center;">
+		<img width=1000 src="TTA_framework/framework.jpeg">
+	</div>
+		<p>
+				The proposed framework for keypoints detection. It begins by extracting the fused appearance and geometric features of the target
+				object from the cropped RGB and the target point cloud. Subsequently, we utilise self-attention and cross-attention to enhance
+				points features and obtain more distinguished intra-frame and inter-frame features. Following, we combine points features into
+				one global feature using a multilayer perceptron (MLP) layer and the 3D keypoints are estimated through a fully connected (FC) layer.
+		</p>
+
+
+
+		<br>
+		<br>
+	<h2 class="Tracking results" style="text-align: left;">NOCS REAL275 Tracking Results</h2>
+		<table align="center" style="border:0px;padding-left:0px">
+			<tr>
+				<td width="30%" style="border:0px;padding:0px" align="center">Categories</td>
+			</tr>
+			<p>
+				 Known object 6D pose tracking results. Green bounding boxes present prdicted 6D pose information, and red dots detected 3D keypoints which are visulised in 2D images.
+			</p>
+			<tr>
+				<td style="border:0px;padding:0px;vertical-align: middle;" align="center"><i>bottle</i></td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/bottle/bottle_red_stanford_norm_scene_2.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/bottle/bottle_shampoo_norm_scene_4.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/bottle/bottle_shengjun_norm_scene_3.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+
+			</tr>
+				<td style="border:0px;padding:0px;vertical-align: middle;" align="center"><i>bowl</i></td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/bowl/bowl_blue_white_chinese_norm_scene_6.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/bowl/bowl_shengjun_norm_scene_3.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/bowl/bowl_white_small_norm_scene_1.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+			</tr>
+
+
+			</tr>
+				<td style="border:0px;padding:0px;vertical-align: middle;" align="center"><i>camera</i></td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/camera/camera_canon_len_norm_scene_1.mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/camera/camera_canon_wo_len_norm_scene_5.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/camera/camera_shengjun_norm_scene_2.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+			</tr>
+
+
+			</tr>
+				<td style="border:0px;padding:0px;vertical-align: middle;" align="center"><i>can</i></td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/can/can_arizona_tea_norm_scene_4.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/can/can_green_norm_scene_2.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/can/can_lotte_milk_norm_scene_6.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+			</tr>
+
+
+			</tr>
+				<td style="border:0px;padding:0px;vertical-align: middle;" align="center"><i>laptop</i></td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/laptop/laptop_air_xin_norm_scene_1.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/laptop/laptop_alienware_norm_scene_5.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/laptop/laptop_mac_pro_norm_scene_4.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+			</tr>
+
+
+			</tr>
+				<td style="border:0px;padding:0px;vertical-align: middle;" align="center"><i>mug</i></td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/mug/mug_anastasia_norm_scene_4.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/mug/mug_brown_starbucks_norm_scene_3.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="300" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/mug/mug_daniel_norm_scene_2.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+			</tr>
+			</tr>
+		</table>
+		<br>
+		<br>
+<!--		<iframe width="560" height="315" src="https://www.youtube.com/embed/J1j0ApREFn8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+
+
+	<h2 class="Tracking results" style="text-align: left;">Data collection</h2>
+		<table align="center" style="border:0px;padding-left:0px">
+			<tr>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="700" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/robot_move/movement_all.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				</td>
+			</tr>
+			<tr>
+				<td width="30%" style="border:0px;padding:0px" align="center">Data collection workspace. The robotic arm follows our pre-desinged trajector, while RGB-D camera recording the scene information.</td>
+			</tr>
+			</tr>
+		</table>
+
+
+		<h2 class="Tracking results" style="text-align: left;">Adaptation results</h2>
+		<table align="center" style="border:0px;padding-left:0px">
+			<tr>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="400" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/Adaptation_results/car_model.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				</td>
+			</tr>
+			<tr>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="400" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/Adaptation_results/computer_mouse.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				</td>
+			</tr>
+			<tr>
+			`<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="400" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/Adaptation_results/cracker_box.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				</td>
+			</tr>
+			<tr>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="400" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/Adaptation_results/measuring_tape.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				</td>
+			</tr>
+						<tr>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="400" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/Adaptation_results/remote_control.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				</td>
+			</tr>
+						<tr>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="400" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/Adaptation_results/scale.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				</td>
+			</tr>
+						<tr>
+				<td style="border:0px;padding:0px 0px 10px 0px;vertical-align: middle;" align="center">
+					<video width="400" controls autoplay muted loop style="vertical-align: middle;"><source src="TTA_videos/Adaptation_results/stapler.mp4" type="video/mp4" >Your browser does not support the video tag.
+					</video>
+				</td>
+				</td>
+			</tr>
+			<tr>
+				<td width="30%" style="border:0px;padding:0px" align="center">Red bounding box means ground truth, black bounding box denotes the results obtained by before adaptation, while green bounding box represents the results obtained by after adaptation. </td>
+			</tr>
+			</tr>
+		</table>
+
+
+	<h2 style="text-align: left;">Contacts</h2>
+	<p>
+		If you have any further enquiries, question, or comments, please contact 
+		<a href="mailto:long.tian@qmul.ac.uk"><u>long.tian@qmul.ac.uk</u></a>.
+	</p>
+
+		</div>
+	<br>
+	<br>
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6de861896b0275cb',m:'ppqRX6tRQH4fUS12qEp4ASn7HTYLZcxczg_G238ujv8-1645031338-0-ASgYPROdw9+o4jFoUNr8Id49tDTtlx5gflbKrAkhfXy2ENQyKulR5gLqJ0Bkdz59YBZm/firsQF0/kj1XO5yyxa5ap7YlCONhhMEOMs9TeGlQzoXAMk4nHBNsniUUaUcRTdaSZhpPQGOa6qn4k9yqil4uoTx4WWfMhmspNBlh1UhCVyy0G3RKeZWSAkf/VI9eQ==',s:[0x1f8bab9e4e,0x98dc696c79],}})();</script></body> 
+</html>
